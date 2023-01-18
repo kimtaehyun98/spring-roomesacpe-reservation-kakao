@@ -2,6 +2,7 @@ package reservation.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import reservation.model.domain.Reservation;
 import reservation.model.domain.Theme;
 import reservation.model.dto.ReservationRequest;
@@ -24,7 +25,7 @@ public class ReservationService {
         this.themeJdbcTemplateRepository = themeJdbcTemplateRepository;
     }
 
-
+    @Transactional
     public Long createReservation(ReservationRequest reservationRequest) {
         // 예약하려고 하는 테마가 존재하는지 확인
         if(!themeJdbcTemplateRepository.checkExistById(reservationRequest.getThemeId())){
@@ -40,6 +41,7 @@ public class ReservationService {
         return reservationJdbcTemplateRepository.save(changeToReservation(reservationRequest));
     }
 
+    @Transactional
     public ReservationResponse getReservation(Long id) {
         if(!reservationJdbcTemplateRepository.existById(id)){
             throw new NotFoundException(RESERVATION_NOT_FOUND);
@@ -51,6 +53,7 @@ public class ReservationService {
         return changeToResponseReservation(reservation, theme);
     }
 
+    @Transactional
     public void deleteReservation(Long id) {
         if(!reservationJdbcTemplateRepository.existById(id)){
             throw new NotFoundException(RESERVATION_NOT_FOUND);

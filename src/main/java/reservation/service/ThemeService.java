@@ -2,6 +2,7 @@ package reservation.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import reservation.model.domain.Theme;
 import reservation.model.dto.ThemeRequest;
 import reservation.respository.ReservationJdbcTemplateRepository;
@@ -26,6 +27,7 @@ public class ThemeService {
         this.reservationJdbcTemplateRepository = reservationJdbcTemplateRepository;
     }
 
+    @Transactional
     public Long createTheme(ThemeRequest themeRequest) {
         // 같은 이름의 테마가 존재하는지 validate
         if(themeJdbcTemplateRepository.checkDuplicateName(themeRequest.getName())){
@@ -38,6 +40,7 @@ public class ThemeService {
         return themeJdbcTemplateRepository.findAll();
     }
 
+    @Transactional
     public void deleteTheme(Long id) {
         // 해당 id 값을 가지는 테마가 존재하는가?
         if(!themeJdbcTemplateRepository.checkExistById(id)){
