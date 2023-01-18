@@ -32,7 +32,7 @@ public class RepositoryTest {
 
     @BeforeEach
     void setUp() {
-        reservationJdbcTemplateRepository = new ReservationJdbcTemplateRepository(jdbcTemplate, jdbcTemplate.getDataSource());
+        reservationJdbcTemplateRepository = new ReservationJdbcTemplateRepository(jdbcTemplate);
     }
 
     @Test
