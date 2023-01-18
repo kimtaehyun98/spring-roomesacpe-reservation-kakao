@@ -8,7 +8,7 @@ import java.time.LocalTime;
 
 @Getter
 @AllArgsConstructor
-public class RequestReservation {
+public class ReservationRequest {
     private LocalDate date;
     private LocalTime time;
     private String name;

@@ -6,17 +6,13 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import reservation.model.domain.Theme;
-import reservation.model.dto.RequestTheme;
+import reservation.model.dto.ThemeRequest;
 import reservation.respository.ReservationJdbcTemplateRepository;
 import reservation.respository.ThemeJdbcTemplateRepository;
 import reservation.service.ThemeService;
 import reservation.util.exception.restAPI.DuplicateException;
 import reservation.util.exception.restAPI.ExistException;
 import reservation.util.exception.restAPI.NotFoundException;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -33,10 +29,10 @@ public class ServiceTest {
     private ReservationJdbcTemplateRepository reservationRepository;
     @Mock
     private ThemeJdbcTemplateRepository themeRepository;
-    private final RequestTheme req;
+    private final ThemeRequest req;
 
     public ServiceTest() {
-        this.req = new RequestTheme("name", "desc", 10000);
+        this.req = new ThemeRequest("name", "desc", 10000);
     }
 
     @Test

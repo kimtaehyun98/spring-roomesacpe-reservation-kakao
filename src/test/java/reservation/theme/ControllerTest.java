@@ -10,7 +10,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import reservation.model.domain.Theme;
-import reservation.model.dto.RequestTheme;
+import reservation.model.dto.ThemeRequest;
 import reservation.respository.ReservationJdbcTemplateRepository;
 import reservation.respository.ThemeJdbcTemplateRepository;
 
@@ -41,11 +41,11 @@ public class ControllerTest {
     void postReservation() {
         Long lastId = returnLastId("post");
 
-        RequestTheme requestTheme = new RequestTheme("name", "desc", 10000);
+        ThemeRequest themeRequest = new ThemeRequest("name", "desc", 10000);
 
         given().log().all()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .body(requestTheme)
+                .body(themeRequest)
                 .when().post("/themes")
                 .then().log().all()
                 .statusCode(HttpStatus.CREATED.value())

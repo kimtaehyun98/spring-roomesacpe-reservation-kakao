@@ -3,9 +3,8 @@ package reservation.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import reservation.model.domain.Reservation;
 import reservation.model.domain.Theme;
-import reservation.model.dto.RequestTheme;
+import reservation.model.dto.ThemeRequest;
 import reservation.service.ThemeService;
 
 import java.net.URI;
@@ -23,8 +22,8 @@ public class ThemeController {
     }
 
     @PostMapping
-    public ResponseEntity<?> createTheme(@RequestBody RequestTheme requestTheme) {
-        Long id = themeService.createTheme(requestTheme);
+    public ResponseEntity<?> createTheme(@RequestBody ThemeRequest themeRequest) {
+        Long id = themeService.createTheme(themeRequest);
         return ResponseEntity.created(URI.create("/themes/" + id)).build();
     }
 

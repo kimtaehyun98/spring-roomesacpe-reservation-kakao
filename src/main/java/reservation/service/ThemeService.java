@@ -3,7 +3,7 @@ package reservation.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import reservation.model.domain.Theme;
-import reservation.model.dto.RequestTheme;
+import reservation.model.dto.ThemeRequest;
 import reservation.respository.ReservationJdbcTemplateRepository;
 import reservation.respository.ThemeJdbcTemplateRepository;
 import reservation.util.exception.restAPI.DuplicateException;
@@ -26,12 +26,12 @@ public class ThemeService {
         this.reservationJdbcTemplateRepository = reservationJdbcTemplateRepository;
     }
 
-    public Long createTheme(RequestTheme requestTheme) {
+    public Long createTheme(ThemeRequest themeRequest) {
         // 같은 이름의 테마가 존재하는지 validate
-        if(themeJdbcTemplateRepository.checkDuplicateName(requestTheme.getName())){
+        if(themeJdbcTemplateRepository.checkDuplicateName(themeRequest.getName())){
             throw new DuplicateException(THEME_DUPLICATED);
         }
-        return themeJdbcTemplateRepository.save(changeToTheme(requestTheme));
+        return themeJdbcTemplateRepository.save(changeToTheme(themeRequest));
     }
 
     public List<Theme> getAllTheme() {
@@ -53,7 +53,7 @@ public class ThemeService {
         themeJdbcTemplateRepository.deleteById(id);
     }
 
-    private Theme changeToTheme(RequestTheme requestTheme) {
-        return new Theme(0L, requestTheme.getName(), requestTheme.getDesc(), requestTheme.getPrice());
+    private Theme changeToTheme(ThemeRequest themeRequest) {
+        return new Theme(0L, themeRequest.getName(), themeRequest.getDesc(), themeRequest.getPrice());
     }
 }

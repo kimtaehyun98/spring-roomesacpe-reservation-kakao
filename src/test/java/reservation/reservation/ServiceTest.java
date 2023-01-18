@@ -7,8 +7,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import reservation.model.domain.Reservation;
-import reservation.model.domain.Theme;
-import reservation.model.dto.RequestReservation;
+import reservation.model.dto.ReservationRequest;
 import reservation.respository.ReservationJdbcTemplateRepository;
 import reservation.respository.ThemeJdbcTemplateRepository;
 import reservation.service.ReservationService;
@@ -32,13 +31,13 @@ public class ServiceTest {
     private ReservationJdbcTemplateRepository reservationRepository;
     @Mock
     private ThemeJdbcTemplateRepository themeRepository;
-    private final RequestReservation req;
+    private final ReservationRequest req;
     private final Reservation reservation;
 
     public ServiceTest() {
         LocalDate date = LocalDate.of(2023, 1, 1);
         LocalTime time = LocalTime.of(11, 0);
-        this.req = new RequestReservation(date, time, "name", 1L);
+        this.req = new ReservationRequest(date, time, "name", 1L);
         this.reservation = new Reservation(0L, date, time, "name", 1L);
     }
 

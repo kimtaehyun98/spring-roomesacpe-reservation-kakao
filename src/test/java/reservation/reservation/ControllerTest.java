@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import reservation.model.domain.Reservation;
 import reservation.model.domain.Theme;
-import reservation.model.dto.RequestReservation;
+import reservation.model.dto.ReservationRequest;
 import reservation.respository.ReservationJdbcTemplateRepository;
 import reservation.respository.ThemeJdbcTemplateRepository;
 
@@ -50,11 +50,11 @@ public class ControllerTest {
         LocalDate localDate = LocalDate.of(2023, 1, 1);
         LocalTime localTime = LocalTime.of(11, 0);
 
-        RequestReservation requestReservation = new RequestReservation(localDate, localTime, "TEST", 1L);
+        ReservationRequest reservationRequest = new ReservationRequest(localDate, localTime, "TEST", 1L);
 
         given().log().all()
                 .contentType(MediaType.APPLICATION_JSON_VALUE)
-                .body(requestReservation)
+                .body(reservationRequest)
                 .when().post("/reservations")
                 .then().log().all()
                 .statusCode(HttpStatus.CREATED.value())
